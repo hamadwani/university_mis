@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <h2><i class="bi bi-file-earmark-text"></i> Enrollment Details</h2>
+
+    <!-- ⭐ PDF EXPORT BUTTON -->
+    <a href="{{ url_for('main.enrollment_pdf', id=enrollment.id) }}" class="btn btn-gold">
+        <i class="bi bi-file-earmark-pdf"></i> Download PDF
+    </a>
+</div>
+
+<div class="card shadow p-4 mt-3">
+
+    <h4 class="mb-3">General Information</h4>
+
+    <p><strong>Programme:</strong> {{ enrollment.programme }}</p>
+    <p><strong>Year:</strong> {{ enrollment.year }}</p>
+    <p><strong>Mode:</strong> {{ enrollment.mode }}</p>
+
+    {% if enrollment.student %}
+    <h4 class="mt-4">Linked Student</h4>
+    <p><strong>Name:</strong> {{ enrollment.student.name }}</p>
+    <p><strong>Roll No:</strong> {{ enrollment.student.roll_no }}</p>
+    <p>
+        <a class="btn btn-outline-dark btn-sm"
+           href="{{ url_for('main.student_profile', id=enrollment.student.id) }}">
+            View Student Profile
+        </a>
+    </p>
+    {% endif %}
+
+    <hr>
+
+    <h4>Demographic Breakdown</h4>
+
+    <table class="table table-bordered mt-3">
+        <tr><th>General Male</th><td>{{ enrollment.general_male }}</td></tr>
+        <tr><th>General Female</th><td>{{ enrollment.general_female }}</td></tr>
+
+        <tr><th>EWS Male</th><td>{{ enrollment.ews_male }}</td></tr>
+        <tr><th>EWS Female</th><td>{{ enrollment.ews_female }}</td></tr>
+
+        <tr><th>SC Male</th><td>{{ enrollment.sc_male }}</td></tr>
+        <tr><th>SC Female</th><td>{{ enrollment.sc_female }}</td></tr>
+
+        <tr><th>ST Male</th><td>{{ enrollment.st_male }}</td></tr>
+        <tr><th>ST Female</th><td>{{ enrollment.st_female }}</td></tr>
+
+        <tr><th>OBC Male</th><td>{{ enrollment.obc_male }}</td></tr>
+        <tr><th>OBC Female</th><td>{{ enrollment.obc_female }}</td></tr>
+
+        <tr><th>Transgender</th><td>{{ enrollment.trans_gender }}</td></tr>
+    </table>
+
+    <div class="text-end mt-3">
+        <a href="{{ url_for('main.enrollment') }}" class="btn btn-secondary">Back</a>
+    </div>
+
+</div>
+
+{% endblock %}

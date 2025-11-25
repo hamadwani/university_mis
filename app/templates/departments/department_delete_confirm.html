@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header"><h2>Delete Department</h2></div>
+
+<div class="card-glow p-4 text-center">
+  <h4>Are you sure you want to delete <strong>{{ department.name }}</strong>?</h4>
+  <form method="POST">
+    <a href="{{ url_for('main.departments') }}" class="btn btn-dark me-2">Cancel</a>
+    <button class="btn btn-danger">Yes, Delete</button>
+  </form>
+</div>
+{% endblock %}

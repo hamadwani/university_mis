@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+  <h2><i class="bi bi-plus-circle"></i> Add Examination Result</h2>
+  <a href="{{ url_for('main.exam_results') }}" class="btn btn-dark">
+    <i class="bi bi-arrow-left"></i> Back
+  </a>
+</div>
+
+<form method="POST" class="card-glow p-4 mt-3">
+
+  <div class="row mb-3">
+    <div class="col-md-8">
+      <label class="form-label">Programme *</label>
+      <input type="text" name="programme" class="form-control" placeholder="Ex: B.Tech CSE" required>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Category Inputs (Bootstrap Grid) -->
+  <h5 class="mb-2">General Category</h5>
+  <div class="row mb-3">
+    <div class="col">
+      <input type="number" class="form-control" name="general_male" placeholder="Male">
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" name="general_female" placeholder="Female">
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" name="general_transgender" placeholder="Transgender">
+    </div>
+  </div>
+
+  <h5 class="mb-2">EWS Category</h5>
+  <div class="row mb-3">
+    <div class="col">
+      <input type="number" class="form-control" name="ews_male" placeholder="Male">
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" name="ews_female" placeholder="Female">
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" name="ews_transgender" placeholder="Transgender">
+    </div>
+  </div>
+
+  <h5 class="mb-2">SC Category</h5>
+  <div class="row mb-3">
+    <div class="col">
+      <input type="number" class="form-control" name="sc_male" placeholder="Male">
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" name="sc_female" placeholder="Female">
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" name="sc_transgender" placeholder="Transgender">
+    </div>
+  </div>
+
+  <h5 class="mb-2">ST Category</h5>
+  <div class="row mb-3">
+    <div class="col">
+      <input type="number" class="form-control" name="st_male" placeholder="Male">
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" name="st_female" placeholder="Female">
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" name="st_transgender" placeholder="Transgender">
+    </div>
+  </div>
+
+  <h5 class="mb-2">OBC Category</h5>
+  <div class="row mb-4">
+    <div class="col">
+      <input type="number" class="form-control" name="obc_male" placeholder="Male">
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" name="obc_female" placeholder="Female">
+    </div>
+    <div class="col">
+      <input type="number" class="form-control" name="obc_transgender" placeholder="Transgender">
+    </div>
+  </div>
+
+  <button class="btn btn-gold w-100">Save Result</button>
+</form>
+
+{% endblock %}

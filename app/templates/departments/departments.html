@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header d-flex justify-content-between align-items-center">
+  <h2><i class="bi bi-building"></i> Departments</h2>
+  <a href="{{ url_for('main.add_department') }}" class="btn btn-gold">
+    <i class="bi bi-plus-circle"></i> Add Department
+  </a>
+</div>
+
+<div class="card-glow p-4 mt-3">
+  <table class="table table-hover align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Code</th>
+        <th>HOD</th>
+        <th class="text-end">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for d in departments %}
+      <tr>
+        <td>{{ loop.index }}</td>
+
+        <!-- Department Profile Link -->
+        <td>
+          <a href="{{ url_for('main.department_profile', dept_id=d.id) }}">
+            {{ d.name }}
+          </a>
+        </td>
+
+        <td>{{ d.code or '-' }}</td>
+        <td>{{ d.hod or '-' }}</td>
+
+        <td class="text-end">
+
+          <!-- View Programmes Button (THIS IS THE ONE MISSING IN YOUR SS) -->
+          <a href="{{ url_for('main.programmes', dept_id=d.id) }}"
+             class="btn btn-sm btn-info"
+             title="View Programmes">
+            <i class="bi bi-list-ul"></i>
+          </a>
+
+          <!-- Edit Department -->
+          <a href="{{ url_for('main.edit_department', dept_id=d.id) }}"
+             class="btn btn-sm btn-dark">
+            <i class="bi bi-pencil-square"></i>
+          </a>
+
+          <!-- PDF Export -->
+          <a href="{{ url_for('main.department_pdf', dept_id=d.id) }}"
+             class="btn btn-sm btn-primary">
+            <i class="bi bi-file-earmark-pdf"></i>
+          </a>
+
+          <!-- Delete Department -->
+          <a href="{{ url_for('main.delete_department', dept_id=d.id) }}"
+             class="btn btn-sm btn-danger">
+            <i class="bi bi-trash"></i>
+          </a>
+
+        </td>
+      </tr>
+
+      {% else %}
+      <tr>
+        <td colspan="5" class="text-center">No departments yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

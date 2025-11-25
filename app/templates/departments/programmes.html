@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+  <h2><i class="bi bi-journals"></i> Programmes — {{ department.name }}</h2>
+
+  <a href="{{ url_for('main.add_programme', dept_id=department.id) }}" class="btn btn-gold">
+    <i class="bi bi-plus-circle"></i> Add Programme
+  </a>
+</div>
+
+<div class="card-glow p-4 mt-3">
+  <table class="table table-bordered align-middle">
+    <thead class="table-dark text-center">
+      <tr>
+        <th>S.No</th>
+        <th>Level</th>
+        <th>Programme</th>
+        <th>Year of Start</th>
+        <th>Admission Criteria</th>
+        <th>Duration (Y/M)</th>
+        <th>Exam System</th>
+        <th>Approved By</th>
+        <th colspan="7">Approved Intake (Category-wise)</th>
+        <th class="text-end">Actions</th>
+      </tr>
+      <tr class="table-secondary text-center">
+        <td colspan="8"></td>
+        <td>General</td>
+        <td>SC</td>
+        <td>ST</td>
+        <td>OBC</td>
+        <td>EWS</td>
+        <td>Supernumerary</td>
+        <td></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for p in programmes %}
+      <tr class="text-center">
+        <td>{{ loop.index }}</td>
+        <td>{{ p.level }}</td>
+        <td>{{ p.programme }}</td>
+        <td>{{ p.year_of_start }}</td>
+        <td>{{ p.admission_criteria }}</td>
+        <td>{{ p.duration_years }}Y / {{ p.duration_months }}M</td>
+        <td>{{ p.exam_system }}</td>
+        <td>{{ p.approved_by }}</td>
+
+        <td>{{ p.seats_general }}</td>
+        <td>{{ p.seats_sc }}</td>
+        <td>{{ p.seats_st }}</td>
+        <td>{{ p.seats_obc }}</td>
+        <td>{{ p.seats_ews }}</td>
+        <td>{{ p.seats_supernumerary }}</td>
+
+        <td class="text-end">
+          <a href="{{ url_for('main.edit_programme', prog_id=p.id) }}" class="btn btn-sm btn-dark">
+            <i class="bi bi-pencil-square"></i>
+          </a>
+
+          <a href="{{ url_for('main.delete_programme', prog_id=p.id) }}" class="btn btn-sm btn-danger">
+            <i class="bi bi-trash"></i>
+          </a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="16" class="text-center">No programmes added yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

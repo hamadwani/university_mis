@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+  <h2><i class="bi bi-book"></i> Enrollment</h2>
+</div>
+
+<div class="card-glow p-4 mt-3">
+
+  <!-- ===============================
+       ADD ENROLLMENT FORM
+  ================================ -->
+  <form method="POST" class="row g-3 mb-4">
+
+    <!-- Link Student -->
+    <div class="col-md-4">
+      <label class="form-label">Link Student (optional)</label>
+      <select name="student_id" class="form-select">
+        <option value="none">-- None --</option>
+        {% for s in students %}
+          <option value="{{ s.id }}">{{ s.name }} ({{ s.roll_no }})</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Programme</label>
+      <input name="programme" class="form-control" required>
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label">Year</label>
+      <input name="year" type="number" class="form-control" required>
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label">Mode</label>
+      <input name="mode" class="form-control" required>
+    </div>
+
+    <!-- Demographics -->
+    <div class="col-md-1"><label class="form-label">GM</label><input name="general_male" type="number" class="form-control"></div>
+    <div class="col-md-1"><label class="form-label">GF</label><input name="general_female" type="number" class="form-control"></div>
+
+    <div class="col-md-1"><label class="form-label">EWS M</label><input name="ews_male" type="number" class="form-control"></div>
+    <div class="col-md-1"><label class="form-label">EWS F</label><input name="ews_female" type="number" class="form-control"></div>
+
+    <div class="col-md-1"><label class="form-label">SC M</label><input name="sc_male" type="number" class="form-control"></div>
+    <div class="col-md-1"><label class="form-label">SC F</label><input name="sc_female" type="number" class="form-control"></div>
+
+    <div class="col-md-1"><label class="form-label">ST M</label><input name="st_male" type="number" class="form-control"></div>
+    <div class="col-md-1"><label class="form-label">ST F</label><input name="st_female" type="number" class="form-control"></div>
+
+    <div class="col-md-1"><label class="form-label">OBC M</label><input name="obc_male" type="number" class="form-control"></div>
+    <div class="col-md-1"><label class="form-label">OBC F</label><input name="obc_female" type="number" class="form-control"></div>
+
+    <div class="col-md-1"><label class="form-label">Trans</label><input name="trans_gender" type="number" class="form-control"></div>
+
+    <div class="col-12 text-end mt-2">
+      <button class="btn btn-gold"><i class="bi bi-check-circle"></i> Save Enrollment</button>
+    </div>
+  </form>
+
+  <!-- ===============================
+       ENROLLMENT TABLE
+  ================================ -->
+  <table class="table table-hover align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Programme</th>
+        <th>Year</th>
+        <th>Mode</th>
+        <th class="text-end">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for e in enrollments %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ e.programme }}</td>
+        <td>{{ e.year }}</td>
+        <td>{{ e.mode }}</td>
+
+        <td class="text-end">
+
+          <!-- EDIT BUTTON -->
+          <a href="{{ url_for('main.edit_enrollment', id=e.id) }}"
+             class="btn btn-sm btn-dark">
+            <i class="bi bi-pencil-square"></i>
+          </a>
+
+          <!-- DELETE BUTTON (POST) -->
+          <form method="POST"
+                action="{{ url_for('main.delete_enrollment', id=e.id) }}"
+                style="display:inline;"
+                onsubmit="return confirm('Delete this enrollment record?');">
+
+            <button class="btn btn-sm btn-danger">
+              <i class="bi bi-trash"></i>
+            </button>
+          </form>
+
+        </td>
+      </tr>
+
+      {% else %}
+      <tr>
+        <td colspan="5" class="text-center text-muted">No enrollment records yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+{% endblock %}

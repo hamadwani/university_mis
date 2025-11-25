@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <h2><i class="bi bi-pencil-square"></i> Edit Enrollment</h2>
+</div>
+
+<div class="card-glow p-4 mt-3">
+
+    <form method="POST" class="row g-3">
+
+        <div class="col-md-4">
+            <label class="form-label">Programme</label>
+            <input name="programme" value="{{ e.programme }}" class="form-control">
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Year</label>
+            <input name="year" value="{{ e.year }}" class="form-control">
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label">Mode</label>
+            <input name="mode" value="{{ e.mode }}" class="form-control">
+        </div>
+
+        <!-- Demography fields -->
+        <h5 class="mt-4">Demographic Breakdown</h5>
+
+        <div class="col-md-1"><label class="form-label">GM</label><input type="number" name="general_male" value="{{ e.general_male }}" class="form-control"></div>
+        <div class="col-md-1"><label class="form-label">GF</label><input type="number" name="general_female" value="{{ e.general_female }}" class="form-control"></div>
+
+        <div class="col-md-1"><label class="form-label">EWS M</label><input type="number" name="ews_male" value="{{ e.ews_male }}" class="form-control"></div>
+        <div class="col-md-1"><label class="form-label">EWS F</label><input type="number" name="ews_female" value="{{ e.ews_female }}" class="form-control"></div>
+
+        <div class="col-md-1"><label class="form-label">SC M</label><input type="number" name="sc_male" value="{{ e.sc_male }}" class="form-control"></div>
+        <div class="col-md-1"><label class="form-label">SC F</label><input type="number" name="sc_female" value="{{ e.sc_female }}" class="form-control"></div>
+
+        <div class="col-md-1"><label class="form-label">ST M</label><input type="number" name="st_male" value="{{ e.st_male }}" class="form-control"></div>
+        <div class="col-md-1"><label class="form-label">ST F</label><input type="number" name="st_female" value="{{ e.st_female }}" class="form-control"></div>
+
+        <div class="col-md-1"><label class="form-label">OBC M</label><input type="number" name="obc_male" value="{{ e.obc_male }}" class="form-control"></div>
+        <div class="col-md-1"><label class="form-label">OBC F</label><input type="number" name="obc_female" value="{{ e.obc_female }}" class="form-control"></div>
+
+        <div class="col-md-1"><label class="form-label">Trans</label><input type="number" name="trans_gender" value="{{ e.trans_gender }}" class="form-control"></div>
+
+        <div class="col-12 text-end mt-4">
+            <button class="btn btn-dark">Update Enrollment</button>
+            <a href="{{ url_for('main.enrollment') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

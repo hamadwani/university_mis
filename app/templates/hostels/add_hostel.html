@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+  <h2><i class="bi bi-plus-circle"></i> Add Hostel</h2>
+</div>
+
+<div class="card-glow p-4 mt-3">
+  <form method="POST" class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Hostel Name</label>
+      <input name="name" class="form-control" required>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Type</label>
+      <input name="type" class="form-control" placeholder="Boys / Girls / Mixed">
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Warden</label>
+      <input name="warden" class="form-control" placeholder="Warden name">
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Capacity</label>
+      <input name="capacity" type="number" class="form-control">
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Students Residing</label>
+      <input name="students_residing" type="number" class="form-control">
+    </div>
+
+    <div class="col-12 text-end">
+      <button class="btn btn-dark">Save Hostel</button>
+      <a href="{{ url_for('main.hostels') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

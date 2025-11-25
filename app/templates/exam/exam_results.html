@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+  <h2><i class="bi bi-journal-check"></i> Examination Results</h2>
+
+  <div>
+    <a href="{{ url_for('main.add_exam_result') }}" class="btn btn-gold">
+      <i class="bi bi-plus-circle"></i> Add Result
+    </a>
+
+  </div>
+</div>
+
+<div class="card-glow p-4 mt-3">
+  <table class="table table-hover table-bordered table-striped align-middle text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Programme</th>
+        <th>General (M/F/T)</th>
+        <th>EWS (M/F/T)</th>
+        <th>SC (M/F/T)</th>
+        <th>ST (M/F/T)</th>
+        <th>OBC (M/F/T)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for r in results %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td><strong>{{ r.programme }}</strong></td>
+
+        <td>{{ r.general_male }}/{{ r.general_female }}/{{ r.general_transgender }}</td>
+        <td>{{ r.ews_male }}/{{ r.ews_female }}/{{ r.ews_transgender }}</td>
+        <td>{{ r.sc_male }}/{{ r.sc_female }}/{{ r.sc_transgender }}</td>
+        <td>{{ r.st_male }}/{{ r.st_female }}/{{ r.st_transgender }}</td>
+        <td>{{ r.obc_male }}/{{ r.obc_female }}/{{ r.obc_transgender }}</td>
+
+        <td class="text-end">
+          <a href="{{ url_for('main.edit_exam_result', exam_id=r.id) }}" class="btn btn-sm btn-dark">
+              <i class="bi bi-pencil-square"></i>
+          </a>
+      
+          <form action="{{ url_for('main.delete_exam_result', exam_id=r.id) }}" method="POST" style="display:inline;">
+              <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this record?');">
+                  <i class="bi bi-trash"></i>
+              </button>
+          </form>
+      </td>
+      
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="8" class="text-center py-4">No exam results added yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header">
+    <h2><i class="bi bi-pencil-square"></i> Edit Staff</h2>
+</div>
+
+<div class="card-glow p-4">
+
+<form method="POST" class="row g-3">
+
+    <div class="col-md-6">
+        <label class="form-label">Name</label>
+        <input type="text" name="name" class="form-control" value="{{ staff.name }}" required>
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label">Staff Type</label>
+        <select name="staff_type" class="form-select">
+            <option {% if staff.staff_type=="Teaching" %}selected{% endif %}>Teaching</option>
+            <option {% if staff.staff_type=="Non-Teaching" %}selected{% endif %}>Non-Teaching</option>
+            <option {% if staff.staff_type=="Contractual" %}selected{% endif %}>Contractual</option>
+            <option {% if staff.staff_type=="Permanent" %}selected{% endif %}>Permanent</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label">Group</label>
+        <select name="group" class="form-select">
+            <option {% if staff.group=="A" %}selected{% endif %}>A</option>
+            <option {% if staff.group=="B" %}selected{% endif %}>B</option>
+            <option {% if staff.group=="C" %}selected{% endif %}>C</option>
+            <option {% if staff.group=="D" %}selected{% endif %}>D</option>
+        </select>
+    </div>
+
+    <div class="col-md-12">
+        <label class="form-label">Sanctioned Strength</label>
+        <input type="number" name="sanctioned_strength" value="{{ staff.sanctioned_strength }}" class="form-control">
+    </div>
+
+    <h5 class="mt-4">Category Distribution</h5>
+
+    {% set categories = ["general", "ews", "sc", "st", "obc"] %}
+    {% for cat in categories %}
+    <div class="row mt-2">
+        <div class="col-md-12"><b>{{ cat|upper }}</b></div>
+
+        <div class="col-4">
+            <input type="number" name="{{ cat }}_male" value="{{ staff[cat+'_male'] }}" placeholder="Male" class="form-control">
+        </div>
+
+        <div class="col-4">
+            <input type="number" name="{{ cat }}_female" value="{{ staff[cat+'_female'] }}" placeholder="Female" class="form-control">
+        </div>
+
+        <div class="col-4">
+            <input type="number" name="{{ cat }}_transgender" value="{{ staff[cat+'_transgender'] }}" placeholder="Transgender" class="form-control">
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="col-12 text-end mt-4">
+        <button class="btn btn-dark">
+            <i class="bi bi-save"></i> Update Staff
+        </button>
+    </div>
+
+</form>
+
+</div>
+
+{% endblock %}

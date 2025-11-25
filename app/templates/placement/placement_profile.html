@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+  <h2><i class="bi bi-file-earmark-text"></i> Placement Details</h2>
+  <a href="{{ url_for('main.placement_pdf', id=p.id) }}" class="btn btn-dark">
+    <i class="bi bi-filetype-pdf"></i> Export PDF
+  </a>
+</div>
+
+<div class="card shadow p-4 mt-3">
+
+  <h4><b>Company:</b> {{ p.company }}</h4>
+  <p><b>Role:</b> {{ p.role or '-' }}</p>
+  <p><b>Date:</b> {{ p.date or '-' }}</p>
+
+  <hr>
+
+  <h4>Details</h4>
+  <p>{{ p.details or 'No details provided.' }}</p>
+
+  <a href="{{ url_for('main.placement') }}" class="btn btn-secondary mt-3">Back</a>
+</div>
+
+{% endblock %}

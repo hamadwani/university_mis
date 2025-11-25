@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header"><h2>Edit Scholarship</h2></div>
+
+<div class="card-glow p-4">
+  <form method="POST" class="row g-3">
+    <div class="col-md-6"><label class="form-label">Title</label><input name="title" class="form-control" value="{{ scholarship.title }}"></div>
+    <div class="col-md-3"><label class="form-label">Amount</label><input name="amount" class="form-control" value="{{ scholarship.amount }}"></div>
+    <div class="col-md-3"><label class="form-label">Beneficiaries</label><input name="total_beneficiaries" type="number" class="form-control" value="{{ scholarship.total_beneficiaries }}"></div>
+
+    <div class="col-md-4"><label class="form-label">PWD</label><input name="pwd" type="number" class="form-control" value="{{ scholarship.pwd }}"></div>
+    <div class="col-md-4"><label class="form-label">Minority</label><input name="minority" type="number" class="form-control" value="{{ scholarship.minority }}"></div>
+    <div class="col-md-12"><label class="form-label">Criteria</label><textarea name="criteria" class="form-control">{{ scholarship.criteria }}</textarea></div>
+
+    <div class="col-12 text-end"><button class="btn btn-dark">Update</button></div>
+  </form>
+</div>
+{% endblock %}

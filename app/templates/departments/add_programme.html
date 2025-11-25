@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <h2><i class="bi bi-journal-plus"></i> Add Programme</h2>
+    <a href="{{ url_for('main.programmes', dept_id=department.id) }}" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Back
+    </a>
+</div>
+
+<div class="card-glow p-4 mt-3">
+
+<form method="POST" class="row g-4">
+
+    <div class="col-md-6">
+        <label class="form-label">Programme Name</label>
+        <input type="text" class="form-control" name="programme" required>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Level</label>
+        <select class="form-select" name="level">
+            <option value="">Select Level</option>
+            <option value="UG">UG</option>
+            <option value="PG">PG</option>
+            <option value="Diploma">Diploma</option>
+            <option value="Certificate">Certificate</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Year of Start</label>
+        <input type="number" class="form-control" name="year_of_start">
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Duration (Years)</label>
+        <input type="number" class="form-control" name="duration_years">
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Duration (Months)</label>
+        <input type="number" class="form-control" name="duration_months">
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Admission Criteria</label>
+        <input type="text" class="form-control" name="admission_criteria">
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Approved By</label>
+        <input type="text" class="form-control" name="approved_by">
+    </div>
+
+    <!-- Seat Distribution -->
+    <h5 class="mt-4"><strong>Seat Distribution</strong></h5>
+
+    {% set seat_fields = ["general", "sc", "st", "obc", "ews", "supernumerary"] %}
+    {% for field in seat_fields %}
+    <div class="col-md-4">
+        <label class="form-label">{{ field|capitalize }} Seats</label>
+        <input type="number" class="form-control" name="seats_{{field}}" value="0">
+    </div>
+    {% endfor %}
+
+    <div class="col-12 text-end mt-3">
+        <button class="btn btn-success"><i class="bi bi-check-circle"></i> Save Programme</button>
+    </div>
+</form>
+
+</div>
+
+{% endblock %}

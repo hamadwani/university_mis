@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-center fade-in">
+    <div class="card profile-box shadow-lg p-4 text-center" style="max-width: 420px; border-radius: 18px;">
+
+        <!-- Header Bar -->
+        <div class="p-3 mb-3 rounded" style="background:#0055A4; color:white;">
+            <h4 class="mb-0">UNIVERSITY OF KASHMIR</h4>
+            <small class="text-light">Staff Identification Card</small>
+        </div>
+
+        <!-- Photo -->
+        <div class="profile-photo mb-3">
+            <img src="{{ url_for('static', filename='img/kashmir_logo.png') }}" width="85">
+        </div>
+
+        <!-- Staff Name -->
+        <h3 class="student-name mb-3">{{ staff.name }}</h3>
+
+        <!-- Info List -->
+        <div class="text-start mt-2">
+
+            {% if staff.staff_type %}
+            <p><span class="profile-label">Staff Type:</span> 
+               <span class="profile-value">{{ staff.staff_type }}</span></p>
+            {% endif %}
+
+            {% if staff.group %}
+            <p><span class="profile-label">Group:</span> 
+               <span class="profile-value">{{ staff.group }}</span></p>
+            {% endif %}
+
+            {% if staff.formatted_join_date %}
+            <p><span class="profile-label">Joined On:</span> 
+               <span class="profile-value">{{ staff.formatted_join_date }}</span></p>
+            {% endif %}
+
+            <p><span class="profile-label">Staff ID:</span> 
+               <span class="profile-value">{{ staff.staff_code }}</span></p>
+
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-4 d-flex justify-content-center gap-2">
+            <button onclick="window.print()" class="btn btn-dark">
+                <i class="bi bi-printer"></i> Print ID Card
+            </button>
+
+            <!-- FIXED PDF LINK -->
+            <a href="{{ url_for('main.staff_pdf', id=staff.id) }}" class="btn btn-primary">
+                <i class="bi bi-download"></i> Download PDF
+            </a>
+        </div>
+
+        <div class="mt-3 d-flex justify-content-center gap-2">
+            <a href="{{ url_for('main.edit_staff', staff_id=staff.id) }}" class="btn btn-warning">
+                <i class="bi bi-pencil-square"></i> Edit
+            </a>
+
+            <a href="{{ url_for('main.staff_list') }}" class="btn btn-secondary">← Back</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

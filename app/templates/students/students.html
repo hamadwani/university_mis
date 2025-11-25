@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="bi bi-people"></i> Students</h2>
+    <a href="{{ url_for('main.add_student') }}" class="btn btn-gold">
+        <i class="bi bi-plus-circle"></i> Add Student
+    </a>
+</div>
+
+<!-- Search Bar -->
+<form method="GET" action="{{ url_for('main.students') }}" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="search" class="form-control"
+               placeholder="Search by Roll Number or Name..." value="{{ request.args.get('search', '') }}">
+        <button class="btn btn-warning" type="submit">
+            <i class="bi bi-search"></i> Search
+        </button>
+    </div>
+</form>
+
+<div class="card-glow p-3">
+<table class="table table-bordered align-middle">
+<thead class="table-dark">
+<tr>
+    <th>#</th>
+    <th>Roll No</th>
+    <th>Name</th>
+    <th>Programme</th>
+    <th>Year</th>
+    <th class="text-end">Actions</th>
+</tr>
+</thead>
+
+<tbody>
+{% for s in students %}
+<tr>
+    <td>{{ loop.index }}</td>
+    <td>{{ s.roll_no }}</td>
+    <td>{{ s.name }}</td>
+    <td>{{ s.programme }}</td>
+    <td>{{ s.year }}</td>
+
+    <td class="text-end">
+        <a href="{{ url_for('main.student_profile', id=s.id) }}" class="btn btn-sm btn-info"><i class="bi bi-credit-card"></i></a>
+        <a href="{{ url_for('main.edit_student', id=s.id) }}" class="btn btn-sm btn-dark"><i class="bi bi-pencil-square"></i></a>
+        <a href="{{ url_for('main.delete_student', id=s.id) }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+    </td>
+</tr>
+{% endfor %}
+
+{% if not students %}
+<tr>
+    <td colspan="6" class="text-center text-muted">No students found.</td>
+</tr>
+{% endif %}
+</tbody>
+</table>
+</div>
+
+{% endblock %}

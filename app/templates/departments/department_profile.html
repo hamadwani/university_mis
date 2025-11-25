@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header d-flex justify-content-between align-items-center">
+  <h2><i class="bi bi-building"></i> {{ department.name }}</h2>
+  <div>
+    <a href="{{ url_for('main.add_programme', dept_id=department.id) }}" class="btn btn-gold"><i class="bi bi-plus-circle"></i> Add Programme</a>
+    <a href="{{ url_for('main.department_pdf', dept_id=department.id) }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i> Export PDF</a>
+  </div>
+</div>
+
+<div class="card-glow p-4 mt-3">
+  <p><strong>Code:</strong> {{ department.code or '-' }} &nbsp; <strong>HOD:</strong> {{ department.hod or '-' }}</p>
+
+  <h5 class="mt-4">Programmes</h5>
+  <table class="table table-hover align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th><th>Programme</th><th>Level</th><th>Year start</th><th>Duration</th>
+        <th>Total Seats</th><th class="text-end">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in programmes %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ p.programme }}</td>
+        <td>{{ p.level or '-' }}</td>
+        <td>{{ p.year_of_start or '-' }}</td>
+        <td>{{ p.duration_years or '-' }}y {{ p.duration_months or '-' }}m</td>
+        <td>{{ p.seats_total() }}</td>
+        <td class="text-end">
+          <a href="{{ url_for('main.edit_programme', programme_id=p.id) }}" class="btn btn-sm btn-dark"><i class="bi bi-pencil-square"></i></a>
+          <form method="POST" action="{{ url_for('main.delete_programme', programme_id=p.id) }}" style="display:inline;">
+            <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="7" class="text-center">No programmes added yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

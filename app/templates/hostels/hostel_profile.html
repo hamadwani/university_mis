@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="page-header">
+  <h2><i class="bi bi-house"></i> Hostel — {{ hostel.name }}</h2>
+</div>
+
+<div class="card shadow p-4 mt-3">
+  <h4>Details</h4>
+  <p><strong>Type:</strong> {{ hostel.type or '-' }}</p>
+  <p><strong>Capacity:</strong> {{ hostel.capacity or 0 }}</p>
+  <p><strong>Students Residing:</strong> {{ hostel.students_residing or 0 }}</p>
+  <p><strong>Warden:</strong> {{ hostel.warden or '-' }}</p>
+  <p><strong>Created on:</strong> {{ hostel.created_at.strftime('%d %B %Y') }}</p>
+
+  <div class="text-end mt-3">
+    <a href="{{ url_for('main.edit_hostel', hostel_id=hostel.id) }}" class="btn btn-dark">Edit</a>
+    <a href="{{ url_for('main.hostels') }}" class="btn btn-secondary">Back</a>
+    <a href="{{ url_for('main.hostel_pdf', hostel_id=hostel.id) }}" class="btn btn-primary">Export PDF</a>
+  </div>
+</div>
+
+{% endblock %}

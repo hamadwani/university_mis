@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+  <h2><i class="bi bi-file-earmark-text"></i> Examination Result — {{ er.programme }}</h2>
+</div>
+
+<div class="card shadow p-4 mt-3">
+  <h4>Programme</h4>
+  <p>{{ er.programme }}</p>
+
+  <hr />
+  <h4>Breakdown</h4>
+  <table class="table table-bordered mt-2">
+    <tr><th></th><th>Male</th><th>Female</th><th>Transgender</th><th>Total</th></tr>
+    <tr><th>General</th><td>{{ er.general_male }}</td><td>{{ er.general_female }}</td><td>{{ er.general_trans }}</td><td>{{ (er.general_male or 0) + (er.general_female or 0) + (er.general_trans or 0) }}</td></tr>
+    <tr><th>EWS</th><td>{{ er.ews_male }}</td><td>{{ er.ews_female }}</td><td>{{ er.ews_trans }}</td><td>{{ (er.ews_male or 0) + (er.ews_female or 0) + (er.ews_trans or 0) }}</td></tr>
+    <tr><th>SC</th><td>{{ er.sc_male }}</td><td>{{ er.sc_female }}</td><td>{{ er.sc_trans }}</td><td>{{ (er.sc_male or 0) + (er.sc_female or 0) + (er.sc_trans or 0) }}</td></tr>
+    <tr><th>ST</th><td>{{ er.st_male }}</td><td>{{ er.st_female }}</td><td>{{ er.st_trans }}</td><td>{{ (er.st_male or 0) + (er.st_female or 0) + (er.st_trans or 0) }}</td></tr>
+    <tr><th>OBC</th><td>{{ er.obc_male }}</td><td>{{ er.obc_female }}</td><td>{{ er.obc_trans }}</td><td>{{ (er.obc_male or 0) + (er.obc_female or 0) + (er.obc_trans or 0) }}</td></tr>
+    <tr class="table-dark"><th>TOTAL</th><td>{{ er.total_male }}</td><td>{{ er.total_female }}</td><td>{{ er.total_trans }}</td><td>{{ er.seats_total() }}</td></tr>
+  </table>
+
+  <div class="text-end mt-3">
+    <a href="{{ url_for('main.exam_results') }}" class="btn btn-secondary">Back</a>
+    <a href="{{ url_for('main.exam_result_pdf', res_id=er.id) }}" class="btn btn-primary"><i class="bi bi-file-earmark-pdf"></i> Export PDF</a>
+  </div>
+</div>
+{% endblock %}
