@@ -1,8 +1,8 @@
-🎓 University MIS (Management Information System)
+University MIS (Management Information System)
 
 A web-based MIS system built using Flask, SQLite, SQLAlchemy, and Bootstrap for managing university operations such as Students, Enrollment, Staff, Hostels, Placements, Programs, Scholarships, NSS, and Exam Results.
 
-🚀 Features
+#Features
 
 Student Management (CRUD + Profile + PDF Export)
 
@@ -24,7 +24,7 @@ Exam Results
 
 Dashboard with statistics
 
-🛠 Tech Stack
+#Tech Stack
 
 Backend: Flask (Python)
 
